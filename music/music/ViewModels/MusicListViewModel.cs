@@ -29,7 +29,7 @@ namespace music.ViewModels
             set { SetProperty(ref aName, value); }
         }
         public ObservableCollection<Album> albums { get; }
-        public ObservableCollection<Track> tracks { get; }
+
 
         private Album selectedAlbum;
         public Album SelectedAlbum
@@ -43,13 +43,11 @@ namespace music.ViewModels
         public ICommand LoadMoreCommad { private set; get; }
         public ICommand GotDetailCommad { private set; get; }
         public ICommand RefreshDataCommand { private set; get; }
-        public ICommand LoadTracksCommand { private set; get; }
 
 
         int page = 0;
         int pageSize = 10;
         private List<Album> AlbumList;
-        private List<Track> trackList; 
         private bool isRefreshing;
 
         public  void LoadData()
@@ -82,12 +80,13 @@ namespace music.ViewModels
 
             IsBusy = false;
         }
-        private async Task CallDetailApiService()
+        private  async Task <Album> CallDetailApiService()
         {
-            albums.Clear();
-            AlbumList = await MusicDetailService.GetDetails(SName);
+            
+            Album a = await MusicDetailService.GetDetails(SName,selectedAlbum.artist);
 
             IsBusy = false;
+            return a;
         }
         private void LoadAlbums()
         {
@@ -105,28 +104,14 @@ namespace music.ViewModels
 
 
         }
-        private void LoadTracks()
-        {
-            int totalpages = trackList.Count / pageSize + 1;
-            if (page < totalpages)
-            {
-                IEnumerable<Track> trackset = trackList.Skip(page * pageSize).Take(pageSize);
-                foreach (Track track  in trackset)
-                {
-                    track.name = track.name;
-                    //"https://lastfm.freetls.fastly.net/i/u/174s/dcf5cf4b9da64e979719a102acd222cc.png";
-                    tracks.Add(track);
-                }
-            }
 
-        }
         private async Task GoToDetail()
         {
             if (selectedAlbum != null)
             {
                 MusicDetailViewModel viewModel = new MusicDetailViewModel();
-                viewModel.SelectedAlbum = selectedAlbum;
-
+                viewModel.SelectedAlbum = await CallDetailApiService();
+                viewModel.LoadTracks();
                 MusicDetailView view = new MusicDetailView
                 {
                     BindingContext = viewModel
@@ -144,7 +129,6 @@ namespace music.ViewModels
 
             LoadDataCommad = new Command(LoadData);
             LoadMoreCommad = new Command(Loadmore);
-            LoadTracksCommand = new Command(LoadTracks);
             GotDetailCommad = new Command(async () => await GoToDetail());
             RefreshDataCommand = new Command(async () => await Refreshdata());
         }

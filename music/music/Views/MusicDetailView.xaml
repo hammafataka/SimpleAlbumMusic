@@ -10,11 +10,10 @@
               ColumnSpacing="10"
               RowSpacing="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="300"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -39,19 +38,14 @@
                    FontSize="Medium"
                    TextColor="Black"/>
 
-            <Label Grid.Row="2"
-                   Grid.Column="1"
-                   Text="{Binding SelectedAlbum.tracks}"
-                   FontSize="Medium"
-                   TextColor="Black"/>
 
-            <Label Grid.Row="3"
+            <Label Grid.Row="2"
                    Grid.Column="0"
                    Text="Artist Name :"
                    FontSize="Medium"
                    TextColor="Black"/>
 
-            <Label Grid.Row="3"
+            <Label Grid.Row="2"
                    Grid.Column="1"
                    Text="{Binding SelectedAlbum.artist}"
                    FontSize="Medium"
@@ -60,8 +54,7 @@
             <CollectionView ItemsSource="{Binding tracks}"
                                 Grid.Row="3"
                                 EmptyView="No items to display"
-                                RemainingItemsThreshold="2"
-                                RemainingItemsThresholdReachedCommand="{Binding LoadTracksCommand}"
+                            Grid.ColumnSpan="2"
                                 SelectionMode="Single">
 
                 <CollectionView.ItemsLayout>
@@ -79,15 +72,12 @@
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
+                            
 
-                            <Image Grid.Row="4"
-                                       Grid.Column="0"
-                                       Source="{Binding SelectedAlbum.imageUrl}"
-                                       Aspect="AspectFill"/>
 
-                            <Label Grid.Row="4"
+                            <Label Grid.Row="0"
                                        Grid.Column="1"
-                                       Text="{Binding SelectedAlbum.Track.name}"
+                                       Text="{Binding name}"
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
