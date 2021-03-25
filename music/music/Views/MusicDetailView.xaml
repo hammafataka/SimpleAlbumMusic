@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="music.Views.MusicDetailView"
+             Title="music Detail">
+    <ContentPage.Content>
+
+        <Grid Margin="10"
+              Padding="10"
+              ColumnSpacing="10"
+              RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Source="{Binding SelectedAlbum.imageUrl}"
+                   Aspect="AspectFit"/>
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Text="Album Name :"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Text="{Binding SelectedAlbum.name}"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+
+            <Label Grid.Row="2"
+                   Grid.Column="1"
+                   Text="{Binding SelectedAlbum.tracks}"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Text="Artist Name :"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+
+            <Label Grid.Row="3"
+                   Grid.Column="1"
+                   Text="{Binding SelectedAlbum.artist}"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+
+            <CollectionView ItemsSource="{Binding tracks}"
+                                Grid.Row="3"
+                                EmptyView="No items to display"
+                                RemainingItemsThreshold="2"
+                                RemainingItemsThresholdReachedCommand="{Binding LoadTracksCommand}"
+                                SelectionMode="Single">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10"
+                                           Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="84"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="4"
+                                       Grid.Column="0"
+                                       Source="{Binding SelectedAlbum.imageUrl}"
+                                       Aspect="AspectFill"/>
+
+                            <Label Grid.Row="4"
+                                       Grid.Column="1"
+                                       Text="{Binding SelectedAlbum.Track.name}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

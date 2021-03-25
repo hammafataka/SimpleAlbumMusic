@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="music.Views.SearchAlbum">
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="searchBar" Placeholder="Search For Albums" TextColor="DarkGray"  Text="{Binding SName}" SearchCommand="{Binding LoadDataCommad}"/>
+            <RefreshView IsRefreshing="{Binding IsBusy}"
+                         Command="{Binding RefreshDataCommand}"
+                         RefreshColor="Blue">
+                <CollectionView ItemsSource="{Binding albums}"
+                                SelectedItem="{Binding SelectedAlbum}"
+                                EmptyView="No items to display"
+                                SelectionChangedCommand="{Binding GotDetailCommad}"
+                                RemainingItemsThreshold="2"
+                                RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommad}"
+                                SelectionMode="Single">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10"
+                                           Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="84"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="125"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Row="0"
+                                       Grid.Column="0"
+                                       Source="{Binding imageUrl}"
+                                       Aspect="AspectFill"/>
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       Text="{Binding name}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Text="{Binding artist}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
