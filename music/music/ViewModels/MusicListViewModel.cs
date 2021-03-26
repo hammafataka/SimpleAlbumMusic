@@ -31,6 +31,7 @@ namespace music.ViewModels
         public ObservableCollection<Album> albums { get; }
 
 
+
         private Album selectedAlbum;
         public Album SelectedAlbum
         {

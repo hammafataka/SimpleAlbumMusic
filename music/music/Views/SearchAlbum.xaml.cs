@@ -41,7 +41,9 @@ namespace music.Views
             {
                 vm.SelectedAlbum = null;
             }
+            
         }
+
 
     }
 }

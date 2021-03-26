@@ -76,10 +76,14 @@
 
 
                             <Label Grid.Row="0"
-                                       Grid.Column="1"
+                                       Grid.Column="0"
                                        Text="{Binding name}"
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
+                            <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       Text="{Binding duration}"
+                                       />
 
                         </Grid>
                     </DataTemplate>

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using music.ViewModels;
+using music.models;
 
 namespace music.models
 {
@@ -15,5 +17,8 @@ namespace music.models
         [JsonProperty("@attr")]
         public Attr Attr { get; set; }
         public Streamable streamable { get; set; }
+
+
+
     }
 }

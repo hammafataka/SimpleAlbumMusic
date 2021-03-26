@@ -8,12 +8,15 @@ namespace music.ViewModels
 {
     public class MusicDetailViewModel:BaseViewModel
     {
+         
         private Album selectedAlbum;
         public Album SelectedAlbum
         {
             get => selectedAlbum;
             set { SetProperty(ref selectedAlbum, value); }
         }
+        
+
         public ObservableCollection<Track> tracks { get; }
         public  void LoadTracks()
         {

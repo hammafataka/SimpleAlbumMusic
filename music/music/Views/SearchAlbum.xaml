@@ -4,7 +4,7 @@
              x:Class="music.Views.SearchAlbum">
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar x:Name="searchBar" Placeholder="Search For Albums" TextColor="DarkGray"  Text="{Binding SName}" SearchCommand="{Binding LoadDataCommad}"/>
+            <SearchBar x:Name="searchBar" Placeholder="Search For Albums" TextColor="DarkGray"  Text="{Binding SName}" SearchCommand="{Binding LoadDataCommad}" />
             <RefreshView IsRefreshing="{Binding IsBusy}"
                          Command="{Binding RefreshDataCommand}"
                          RefreshColor="Blue">
